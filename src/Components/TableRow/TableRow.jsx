@@ -1,36 +1,74 @@
 import React, { useState } from "react";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import DropDown from "../Dropdown/Dropdown.jsx";
-import { baseUrl,deleteUserData } from "../../Utils/Api.js";
-import { message,Modal } from "antd";
+import {
+  baseUrl,
+  deleteUserData,
+  updateStatusActive,
+  updateStatusInActive,
+} from "../../Utils/Api.js";
+import { message, Modal } from "antd";
 
-function TableRow({ client, index,refresh,setRefresh }) {
-
+function TableRow({ client, index, refresh, setRefresh }) {
   const [dropdown, setDropdown] = useState(false);
   const [statusDropdown, setStatusDropdown] = useState(false);
   function handleDelete(id) {
     Modal.confirm({
-     title: 'Are you sure you want to delete this department?',
-     okText: 'Yes',
-     okType: 'danger',
-     cancelText: 'No',
-    async onOk() {
+      title: "Are you sure you want to delete this user?",
+      okText: "Yes",
+      okType: "danger",
+      cancelText: "No",
+      async onOk() {
+        const deleted = await deleteUserData(id);
 
-      const deleted = await deleteUserData(id)
+        if (deleted.success) {
+          message.success(deleted.message);
+          setRefresh(!refresh);
+        } else {
+          message.error(deleted.message);
+        }
+      },
+      onCancel() {},
+    });
+  }
+  function handleActiveStatus(id) {
+    Modal.confirm({
+      title: "Are you sure you want to active user status?",
+      okText: "Yes",
+      okType: "danger",
+      cancelText: "No",
+      async onOk() {
+        const activeUser = await updateStatusActive(id);
 
-      if(deleted.success) {
-        message.success(deleted.message);
-        setRefresh(!refresh)
-      }else {
+        if (activeUser.success) {
+          message.success(activeUser.message);
+          setRefresh(!refresh);
+        } else {
+          message.error(activeUser.message);
+        }
+      },
+      onCancel() {},
+    });
+  }
 
-        message.error(deleted.message);
-      }
-    
-     },
-     onCancel() {},
-   });
+  function handleInactiveStatus(id) {
+    Modal.confirm({
+      title: "Are you sure you want to Inactive user status?",
+      okText: "Yes",
+      okType: "danger",
+      cancelText: "No",
+      async onOk() {
+        const inActiveUser = await updateStatusInActive(id);
 
-   
+        if (inActiveUser.success) {
+          message.success(inActiveUser.message);
+          setRefresh(!refresh);
+        } else {
+          message.error(inActiveUser.message);
+        }
+      },
+      onCancel() {},
+    });
   }
 
   return (
@@ -39,7 +77,7 @@ function TableRow({ client, index,refresh,setRefresh }) {
         {index + 1}
       </td>
       <td className=" pb-3 pt-1 px-3 text-sm font-medium text-gray-700 whitespace-nowrap">
-        {client.fName}
+        {client.fName} {client.lName}
       </td>
       <td className=" pb-3 pt-1 px-3 text-base font-normal text-gray-700 whitespace-nowrap">
         {client.email}
@@ -49,33 +87,30 @@ function TableRow({ client, index,refresh,setRefresh }) {
       </td>
 
       <td className=" pb-3 pt-1 px-3 text-base font-normal text-gray-700 whitespace-nowrap">
-      <div className="">
+        <div className="">
           <div className="relative">
-          <button
-          onClick={() => setStatusDropdown(!statusDropdown)}
-          className=" p-1 px-2 text-xs font-normal uppercase tracking-wider text-gray-100 bg-pink-900 rounded-lg bg-opacity-95 cursor-pointer hover:bg-opacity-75"
-        >
-            {client.status}{" "}
-          <KeyboardArrowDownIcon
-            sx={{
-              fontSize: "17px",
-              cursor: "pointer",
-            }}
-          />
+            <button
+              onClick={() => setStatusDropdown(!statusDropdown)}
+              className=" p-1 px-2 text-xs font-normal uppercase tracking-wider text-gray-100 bg-pink-900 rounded-lg bg-opacity-95 cursor-pointer hover:bg-opacity-75"
+            >
+              {client.status}{" "}
+              <KeyboardArrowDownIcon
+                sx={{
+                  fontSize: "17px",
+                  cursor: "pointer",
+                }}
+              />
             </button>
 
-            {statusDropdown && <DropDown />}
+            {statusDropdown && <DropDown userId={client._id} handleActiveStatus={handleActiveStatus} handleInactiveStatus={handleInactiveStatus}/>}
           </div>
         </div>
-      
       </td>
       <td className=" pb-3 pt-1 px-3 text-base flex justify-center items-center text-gray-700 ">
         <div className="h-10 w-10 ">
           <img
             className="h-8 w-8 rounded-full mt-2"
-
             src={`${baseUrl}/uploads/${client?.profile}`}
-
             alt="client"
           />
         </div>
@@ -109,7 +144,13 @@ function TableRow({ client, index,refresh,setRefresh }) {
               </svg>
             </button>
 
-            {dropdown && <DropDown dropdown={dropdown} userId={client._id} handleDelete={handleDelete} />}
+            {dropdown && (
+              <DropDown
+                dropdown={dropdown}
+                userId={client._id}
+                handleDelete={handleDelete}
+              />
+            )}
           </div>
         </div>
       </td>

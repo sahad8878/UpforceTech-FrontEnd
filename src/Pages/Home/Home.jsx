@@ -21,7 +21,7 @@ useEffect(() => {
       setCurrentPage(userData.currentPage);
     };
     fechData();
-  }, [currentPage, search]);
+  }, [currentPage, search,refresh]);
 
   const handlePageChange = (event, value) => {
     setCurrentPage(value);

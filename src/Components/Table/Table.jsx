@@ -4,7 +4,6 @@ import TableRow from "../TableRow/TableRow";
 import './Table.css'
 function Table({users,handlePageChange,currentPage,totalPages,refresh,setRefresh}) {
 
-
   return (
     <div className="overflow-auto rounded-lg shadow-xl">
       <table className="w-full border-b">

@@ -68,3 +68,26 @@ export const viewUserDetails = async (id) => {
     throw error;
   }
 }
+
+export const updateStatusActive = async (id) => {
+console.log(id,"active");
+  try {
+    const response = await axios.patch(`/update-activeUserStatus?id=${id}`);
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching EditUserData:', error);
+    throw error;
+  }
+}
+
+export const updateStatusInActive = async (id) => {
+  console.log(id,"inactive");
+
+  try {
+    const response = await axios.patch(`/update-inActiveUserStatus?id=${id}`);
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching EditUserData:', error);
+    throw error;
+  }
+}
