@@ -12,16 +12,16 @@ function Home() {
   const [search, setSearch] = useState("");
   const [users, setUsers] = useState([]);
 const [refresh,setRefresh ] = useState(false)
-  const fechData = async () => {
-    const userData = await fechUserData(currentPage, search);
-    setUsers(userData.users);
-    setTotalPages(userData.totalPages);
-    setCurrentPage(userData.currentPage);
-  };
 
-  useEffect(() => {
+useEffect(() => {
+    const fechData = async () => {
+      const userData = await fechUserData(currentPage, search);
+      setUsers(userData.users);
+      setTotalPages(userData.totalPages);
+      setCurrentPage(userData.currentPage);
+    };
     fechData();
-  }, [currentPage, search,fechData]);
+  }, [currentPage, search]);
 
   const handlePageChange = (event, value) => {
     setCurrentPage(value);

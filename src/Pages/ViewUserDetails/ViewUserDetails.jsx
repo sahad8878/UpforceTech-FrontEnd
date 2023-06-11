@@ -8,18 +8,18 @@ const ViewUserDetails = () => {
 
   const [user, setUser] = useState([]);
 
-  const fechUserDetails = async () => {
-    const userData = await viewUserDetails(userId);
-    if (userData.success) {
-      setUser(userData.user);
-    } else {
-      message.error(userData.message);
-    }
-  };
-
+  
   useEffect(() => {
+    const fechUserDetails = async () => {
+      const userData = await viewUserDetails(userId);
+      if (userData.success) {
+        setUser(userData.user);
+      } else {
+        message.error(userData.message);
+      }
+    };
     fechUserDetails();
-  }, [fechUserDetails]);
+  }, []);
 
   return (
     <div className="px-10 md:px-16 lg:px-24 mb-9">

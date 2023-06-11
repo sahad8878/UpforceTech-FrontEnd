@@ -63,14 +63,15 @@ const EditUser = () => {
     // Return true if there are no errors, false otherwise
     return Object.keys(errors).length === 0;
   };
-  const fechUserData = async () => {
-    const userData = await fechEditUserData(userId);
 
-    setUser(userData.user);
-  };
   useEffect(() => {
+    const fechUserData = async () => {
+      const userData = await fechEditUserData(userId);
+
+      setUser(userData.user);
+    };
     fechUserData();
-  }, [fechUserData]);
+  }, []);
 
   const handleEditUser = async (event) => {
     event.preventDefault();
