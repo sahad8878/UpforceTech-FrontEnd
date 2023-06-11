@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 
-// // const baseUrl = 'https://dashboard-backend-gki6.onrender.com';
+// // const baseUrl = 'https://upfrocetech-backend.onrender.com';
 const baseUrl = 'http://localhost:8080'
 
 const instance = axios.create({
