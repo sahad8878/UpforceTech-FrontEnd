@@ -71,7 +71,7 @@ const EditUser = () => {
       setUser(userData.user);
     };
     fechUserData();
-  }, []);
+  }, [userId]);
 
   const handleEditUser = async (event) => {
     event.preventDefault();

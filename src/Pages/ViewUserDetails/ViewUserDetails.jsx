@@ -19,7 +19,7 @@ const ViewUserDetails = () => {
       }
     };
     fechUserDetails();
-  }, []);
+  }, [userId]);
 
   return (
     <div className="px-10 md:px-16 lg:px-24 mb-9">
