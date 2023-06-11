@@ -1,8 +1,8 @@
 
 import axios from '../Axios/Axios'
 
-// export const baseUrl = 'https://upfrocetech-backend.onrender.com';
-export const baseUrl = 'http://localhost:8080'
+export const baseUrl = 'https://upfrocetech-backend.onrender.com';
+// export const baseUrl = 'http://localhost:8080'
  
 
 export const addUserData = async (postData) => {
