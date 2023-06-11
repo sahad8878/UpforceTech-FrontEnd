@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { message } from "antd";
-import {useNavigate}  from 'react-router-dom'
+import { useNavigate } from "react-router-dom";
 import profile from "../../Assets/user.png";
 import { addUserData } from "../../Utils/Api";
 
@@ -90,15 +90,13 @@ function AddUserForm() {
     formData.append("location", data.location);
     formData.append("file", data.file);
 
-    console.log(data, "fff");
     if (validateFields(data)) {
       const addedUser = await addUserData(formData);
       if (addedUser.success) {
         message.success(addedUser.message);
-        navigate("/")
-      }else {
+        navigate("/");
+      } else {
         message.error(addedUser.message);
-
       }
     }
   };

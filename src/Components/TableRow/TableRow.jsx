@@ -102,7 +102,13 @@ function TableRow({ client, index, refresh, setRefresh }) {
               />
             </button>
 
-            {statusDropdown && <DropDown userId={client._id} handleActiveStatus={handleActiveStatus} handleInactiveStatus={handleInactiveStatus}/>}
+            {statusDropdown && (
+              <DropDown
+                userId={client._id}
+                handleActiveStatus={handleActiveStatus}
+                handleInactiveStatus={handleInactiveStatus}
+              />
+            )}
           </div>
         </div>
       </td>

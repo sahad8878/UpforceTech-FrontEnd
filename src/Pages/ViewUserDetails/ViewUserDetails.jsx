@@ -8,7 +8,6 @@ const ViewUserDetails = () => {
 
   const [user, setUser] = useState([]);
 
-  
   useEffect(() => {
     const fechUserDetails = async () => {
       const userData = await viewUserDetails(userId);

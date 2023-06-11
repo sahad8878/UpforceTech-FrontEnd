@@ -3,17 +3,16 @@ import { Link } from "react-router-dom";
 import Table from "../../Components/Table/Table";
 import AddIcon from "@mui/icons-material/Add";
 import { fechUserData } from "../../Utils/Api";
-import { CSVLink } from 'react-csv';
-
+import { CSVLink } from "react-csv";
 
 function Home() {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [search, setSearch] = useState("");
   const [users, setUsers] = useState([]);
-const [refresh,setRefresh ] = useState(false)
+  const [refresh, setRefresh] = useState(false);
 
-useEffect(() => {
+  useEffect(() => {
     const fechData = async () => {
       const userData = await fechUserData(currentPage, search);
       setUsers(userData.users);
@@ -21,7 +20,7 @@ useEffect(() => {
       setCurrentPage(userData.currentPage);
     };
     fechData();
-  }, [currentPage, search,refresh]);
+  }, [currentPage, search, refresh]);
 
   const handlePageChange = (event, value) => {
     setCurrentPage(value);
@@ -31,18 +30,18 @@ useEffect(() => {
     setSearch(event.target.value);
   };
   const headers = [
-    { label: 'Id', key: '_id' },
-    { label: 'FullName', key: 'fName' },
-    { label: 'Email', key: 'email' },
-    { label: 'Number', key: 'number' },
-    { label: 'Gender', key: 'gender' },
-    { label: 'Status', key: 'status' },
+    { label: "Id", key: "_id" },
+    { label: "FullName", key: "fName" },
+    { label: "Email", key: "email" },
+    { label: "Number", key: "number" },
+    { label: "Gender", key: "gender" },
+    { label: "Status", key: "status" },
   ];
-  
+
   const transformData = (data, headers) => {
     return [
-      headers.map(header => header.label),
-      ...data.map(row => headers.map(header => row[header.key])),
+      headers.map((header) => header.label),
+      ...data.map((row) => headers.map((header) => row[header.key])),
     ];
   };
   return (
@@ -78,9 +77,15 @@ useEffect(() => {
             </button>
           </Link>
           {users.length !== 0 && (
-         
-        <CSVLink className="bg-pink-900 py-1 px-2 text-white rounded-lg" data={users} headers={headers} filename={'users.csv'} transformer={transformData}>Export to csv</CSVLink>
-
+            <CSVLink
+              className="bg-pink-900 py-1 px-2 text-white rounded-lg"
+              data={users}
+              headers={headers}
+              filename={"users.csv"}
+              transformer={transformData}
+            >
+              Export to csv
+            </CSVLink>
           )}
         </div>
       </div>

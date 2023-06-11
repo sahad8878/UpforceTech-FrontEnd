@@ -5,7 +5,13 @@ import VisibilityIcon from "@mui/icons-material/Visibility";
 import BorderColorIcon from "@mui/icons-material/BorderColor";
 import DeleteIcon from "@mui/icons-material/Delete";
 
-function Dropdown({ dropdown, userId, handleDelete ,handleInactiveStatus,handleActiveStatus}) {
+function Dropdown({
+  dropdown,
+  userId,
+  handleDelete,
+  handleInactiveStatus,
+  handleActiveStatus,
+}) {
   return (
     <div
       className={` 
@@ -82,8 +88,9 @@ function Dropdown({ dropdown, userId, handleDelete ,handleInactiveStatus,handleA
             aria-orientation="vertical"
             aria-labelledby="options-menu"
           >
-            <span className="block p-1.5 font-medium cursor-pointer text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
-             onClick={() => handleActiveStatus(userId)}
+            <span
+              className="block p-1.5 font-medium cursor-pointer text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+              onClick={() => handleActiveStatus(userId)}
             >
               Active
             </span>
@@ -94,8 +101,9 @@ function Dropdown({ dropdown, userId, handleDelete ,handleInactiveStatus,handleA
             aria-orientation="vertical"
             aria-labelledby="options-menu"
           >
-            <span className="block p-1.5 cursor-pointer font-medium text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
-             onClick={() => handleInactiveStatus(userId)}
+            <span
+              className="block p-1.5 cursor-pointer font-medium text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+              onClick={() => handleInactiveStatus(userId)}
             >
               Inactive
             </span>
